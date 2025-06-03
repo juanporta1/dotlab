@@ -7,7 +7,7 @@ using namespace std;
 class Ball {
 public:
 	GLuint vao, vbo;
-	vector<Vertex*> vertices;
+	vector<Vertex> vertices;
 	Window* window;
 	Vertex* center;
 	vector<float> floatVerticesData;

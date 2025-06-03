@@ -3,6 +3,8 @@
 #include <iostream>
 #include <chrono>
 #include <Ball.h>
+#include <CartesianPlane.h>
+#include <Vector2D.h>
 using namespace std;
 int main()
 {
@@ -16,7 +18,10 @@ int main()
 
 	auto lastFrame = chrono::high_resolution_clock::now();
 	Ball b(700.0f, 400.0f, 50.0f, 255.0f, 255.0f, 255.0f, &window);
-	b.accY = -9.81f;
+	//b.accY = -9.81f;
+
+	Vector2D vec1(200.0f, 0.0f, 255.0f, 0.0f, 0.0f, &window);
+	CartesianPlane cp = CartesianPlane(&window);
 	while (!glfwWindowShouldClose(window.window)) {
 		auto currentFrame = chrono::high_resolution_clock::now();
 		chrono::duration<float> delta = currentFrame - lastFrame;
@@ -27,9 +32,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(window.shaderProgram);
 
-		b.update(dt);
-		b.render();
-
+		/*b.update(dt);
+		b.render();*/
+		cp.render();
+		vec1.render();
 		glfwSwapBuffers(window.window);
 		glfwPollEvents();
 	}

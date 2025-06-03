@@ -129,14 +129,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="CartesianPlane.cpp" />
     <ClCompile Include="dotlab.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="CartesianPlane.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>

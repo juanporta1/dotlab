@@ -1,9 +1,9 @@
 #include <Vertex.h>
 #include <glm/glm.hpp>
 using namespace glm;
-Vertex::Vertex(float x, float y, float r, float g, float b) {
+Vertex::Vertex(float x, float y, float r, float g, float b, float t) {
 	position = vec3(x, y, 0.0f);
-	color = vec3(r, g, b);
+	color = vec4(r, g, b, t);
 }
 
 Vertex::~Vertex(){}
@@ -18,4 +18,5 @@ void Vertex::updateFloatData(float dx, float dy) {
 	floatData.push_back(color.r);
 	floatData.push_back(color.g);
 	floatData.push_back(color.b);
+	floatData.push_back(color.a);
 }
