@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Tripulante\Desktop\Repos\dotlab\vcpkg_installed\x64-windows\include;C:\Users\Tripulante\Desktop\Repos\dotlab;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Tripulante\Desktop\Repos\dotlab\include\utils;C:\Users\Tripulante\Desktop\Repos\dotlab\include\render;C:\Users\Tripulante\Desktop\Repos\dotlab\include\core;C:\Users\Tripulante\Desktop\Repos\dotlab\vcpkg_installed\x64-windows\include;C:\Users\Tripulante\Desktop\Repos\dotlab;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,21 +128,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="CartesianPlane.cpp" />
-    <ClCompile Include="dotlab.cpp" />
-    <ClCompile Include="Functions.cpp" />
-    <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="Vertex.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="src\core\Ball.cpp" />
+    <ClCompile Include="src\core\Vector2D.cpp" />
+    <ClCompile Include="src\core\VectorGroup2D.cpp" />
+    <ClCompile Include="src\core\Vertex.cpp" />
+    <ClCompile Include="src\dotlab.cpp" />
+    <ClCompile Include="src\render\CartesianPlane.cpp" />
+    <ClCompile Include="src\render\Window.cpp" />
+    <ClCompile Include="src\utils\Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="CartesianPlane.h" />
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="Vector2D.h" />
-    <ClInclude Include="Vertex.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="include\core\Ball.h" />
+    <ClInclude Include="include\core\Vector2D.h" />
+    <ClInclude Include="include\core\VectorGroup2D.h" />
+    <ClInclude Include="include\core\Vertex.h" />
+    <ClInclude Include="include\render\CartesianPlane.h" />
+    <ClInclude Include="include\render\Window.h" />
+    <ClInclude Include="include\utils\Functions.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\fragmentShader.glsl" />
+    <None Include="src\shaders\vertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,72 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\DotShapes">
-      <UniqueIdentifier>{73137667-2d53-4d64-b9fb-f676d74263ee}</UniqueIdentifier>
+    <Filter Include="headers">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files\DotShapes">
-      <UniqueIdentifier>{b6a1fcd9-934a-40f7-abe8-bbfb284e2bab}</UniqueIdentifier>
+    <Filter Include="headers\core">
+      <UniqueIdentifier>{986b1c83-f0d0-4206-a25c-ce47f05dc1e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Settings">
-      <UniqueIdentifier>{bcbcac50-5207-4c23-ac9a-4ec6bc75ce80}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resource Files\Settings">
-      <UniqueIdentifier>{5a7f48af-4571-48e8-a084-40ea14736137}</UniqueIdentifier>
+    <Filter Include="headers\render">
+      <UniqueIdentifier>{df301095-3d89-4cae-aab8-ff0543d3c999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="headers\utils">
+      <UniqueIdentifier>{0928cadf-9831-481c-aa62-9910ba718efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{c0c273c3-c90f-4ca7-9bab-d5cbe90e0391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\render">
+      <UniqueIdentifier>{7a643460-b6c4-40c6-8ce7-9d9fd12b82ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\utils">
+      <UniqueIdentifier>{8fcaff12-27a6-4a11-9e57-b1871867b490}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dotlab.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\dotlab.cpp">
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
-      <Filter>Resource Files\DotShapes</Filter>
+    <ClCompile Include="src\core\Ball.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Resource Files\DotShapes</Filter>
+    <ClCompile Include="src\core\Vector2D.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Resource Files\DotShapes</Filter>
+    <ClCompile Include="src\core\Vertex.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="CartesianPlane.cpp">
-      <Filter>Resource Files\DotShapes</Filter>
+    <ClCompile Include="src\render\CartesianPlane.cpp">
+      <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="Functions.cpp">
-      <Filter>Resource Files\Settings</Filter>
+    <ClCompile Include="src\render\Window.cpp">
+      <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Resource Files\Settings</Filter>
+    <ClCompile Include="src\utils\Functions.cpp">
+      <Filter>src\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\core\VectorGroup2D.cpp">
+      <Filter>src\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h">
-      <Filter>Header Files\DotShapes</Filter>
+    <ClInclude Include="include\core\Ball.h">
+      <Filter>headers\core</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files\DotShapes</Filter>
+    <ClInclude Include="include\core\Vector2D.h">
+      <Filter>headers\core</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Header Files\DotShapes</Filter>
+    <ClInclude Include="include\core\Vertex.h">
+      <Filter>headers\core</Filter>
     </ClInclude>
-    <ClInclude Include="CartesianPlane.h">
-      <Filter>Header Files\DotShapes</Filter>
+    <ClInclude Include="include\render\Window.h">
+      <Filter>headers\render</Filter>
     </ClInclude>
-    <ClInclude Include="Functions.h">
-      <Filter>Header Files\Settings</Filter>
+    <ClInclude Include="include\render\CartesianPlane.h">
+      <Filter>headers\render</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files\Settings</Filter>
+    <ClInclude Include="include\utils\Functions.h">
+      <Filter>headers\utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\core\VectorGroup2D.h">
+      <Filter>headers\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\fragmentShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="src\shaders\vertexShader.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
