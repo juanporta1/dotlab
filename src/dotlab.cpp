@@ -18,6 +18,7 @@ int main()
 	//Declaracion de objetos
 	Vector2D vec1(200.0f, 70.0f, 255.0f, 255.0f, 0.0f, 1.0f, &window);
 	Vector2D vec2(100.0f, 40.0f, 0.0f, 255.0f, 0.0f, 1.0f, &window);
+	Vector2D vec3(100.0f, 170.0f, 0.0f, 255.0f, 255.0f, 1.0f, &window);
 
 	VectorGroup2D vecGroup1(vector<Vector2D>({vec1, vec2}), &window);
 	CartesianPlane cp = CartesianPlane(&window);
