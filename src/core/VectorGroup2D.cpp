@@ -6,7 +6,8 @@
 #include <iostream>
 using namespace std;
 
-VectorGroup2D::VectorGroup2D(vector<Vector2D> vs, Window* w) : vectors(vs), window(w), mainVector(Vector2D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, window)) {
+VectorGroup2D::VectorGroup2D(vector<Vector2D> vs, Window* w, VectorGroupOptions opt) : vectors(vs), window(w) {
+	options = opt;
 	getSum();
 	
 }
@@ -18,6 +19,10 @@ void VectorGroup2D::render() {
 		v.render();
 	}
 	mainVector.render();
+	if (options.renderComponents) {
+		xComponent.render();
+		yComponent.render();
+	}
 }
 
 void VectorGroup2D::getSum() {
@@ -35,6 +40,20 @@ void VectorGroup2D::getSum() {
 	float mainAngle = atan2(totalYComponent, totalXComponent);
 
 	mainVector = Vector2D(mainMagnitude, radsToDegrees(mainAngle), 255.0f, 0.0f, 0.0f, window);
+	vec2 mainComponentMagnitude = mainVector.getComponents();
+	
+	float xComponentDirection = 180.0f;
+	float yComponentDirection = 90.0f;
+	if(mainVector.direction < 90.0f || mainVector.direction > 270.0f){
+		xComponentDirection = 0.0f;
+	}
+
+	if (mainVector.direction > 180.0f) {
+		yComponentDirection = 270.0f;
+	}
+
+	xComponent = Vector2D(GLMagnitudeToPixels(mainComponentMagnitude.x, window->width), xComponentDirection, 0.0f, 255.0f, 0.0f, window);
+	yComponent = Vector2D(GLMagnitudeToPixels(mainComponentMagnitude.y, window->height), yComponentDirection, 0.0f, 0.0f, 255.0f, window);
 }
 
 void VectorGroup2D::addVector(Vector2D v) {

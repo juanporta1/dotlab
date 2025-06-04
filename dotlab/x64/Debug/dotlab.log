@@ -1,4 +1,2 @@
-﻿  Vector2D.cpp
-C:\Users\Tripulante\Desktop\Repos\dotlab\src\core\Vector2D.cpp(183,48): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-C:\Users\Tripulante\Desktop\Repos\dotlab\src\core\Vector2D.cpp(185,53): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+﻿  dotlab.cpp
   dotlab.vcxproj -> C:\Users\Tripulante\Desktop\Repos\dotlab\x64\Debug\dotlab.exe
