@@ -55,7 +55,6 @@ Vector2D::Vector2D(float magnitude, float direction, float r, float g, float b, 
 
 	this->a = 1.0f;
 
-	cout << a << endl;
 	window = w;
 	updateVertices();
 	generateVaoAndVbo();
@@ -68,19 +67,21 @@ Vector2D::Vector2D(float magnitude, float direction, float r, float g, float b, 
 
 	this->a = a;
 
-	cout << a << endl;
 	window = w;
 	updateVertices();
 	generateVaoAndVbo();
 }
 
 
-Vector2D::Vector2D(float magnitude, float direction, float startX, float startY, float r, float g, float b, Window* w) : magnitude(magnitude), direction(direction), startX(startX), startY(startY) {
+Vector2D::Vector2D(float magnitude, float direction, float sX, float sY, float r, float g, float b, Window* w) : magnitude(magnitude), direction(direction), window(w) {
 	this->r = rgbToGL(r);
 	this->g = rgbToGL(g);
 	this->b = rgbToGL(b);
+
 	this->a = 1.0f;
-	window = w;
+
+	startX = pixelsToGL(sX, window->width);
+	startY = pixelsToGL(sY, window->height);
 	updateVertices();
 	generateVaoAndVbo();
 }
@@ -114,6 +115,9 @@ void Vector2D::getArrow() {
 
 
 void Vector2D::updateVertices() {
+	vertices.clear();
+	arrowVertices.clear();
+
 	float bodyWidthX = pixelMagnitudeToGL(2.0f, window->width);
 	float bodyWidthY = pixelMagnitudeToGL(2.0f, window->height);
 
@@ -125,20 +129,23 @@ void Vector2D::updateVertices() {
 	float unitX = cos(angleRadians);
 	float unitY = sin(angleRadians);
 
-	float baseLeftX = -unitY * bodyWidthX;
-	float baseLeftY = unitX * bodyWidthY;
-	float baseRightX = unitY * bodyWidthX;
-	float baseRightY = -unitX * bodyWidthY;
+	float convertedStartX = startX;
+	float convertedStartY = startY;
 
-	float finalTipX = startX + unitX * magnitudeGL_X;
-	float finalTipY = startY + unitY * magnitudeGL_Y;
+	float baseLeftX = convertedStartX + -unitY * bodyWidthX;
+	float baseLeftY = convertedStartY +  unitX * bodyWidthY;
+	float baseRightX = convertedStartX + unitY * bodyWidthX;
+	float baseRightY = convertedStartY + -unitX * bodyWidthY;
 
-	float bodyEndX = startX + unitX * (magnitudeGL_X - pixelMagnitudeToGL(5.0f, window->width));
-	float bodyEndY = startY + unitY * (magnitudeGL_Y - pixelMagnitudeToGL(5.0f, window->height));
+	float finalTipX = convertedStartX + unitX * magnitudeGL_X;
+	float finalTipY = convertedStartY + unitY * magnitudeGL_Y;
+
+	float bodyEndX = convertedStartX + unitX * (magnitudeGL_X - pixelMagnitudeToGL(5.0f, window->width));
+	float bodyEndY = convertedStartY + unitY * (magnitudeGL_Y - pixelMagnitudeToGL(5.0f, window->height));
 
 	float endLeftX = bodyEndX + -unitY * bodyWidthX;
-	float endLeftY = bodyEndY + unitX * bodyWidthY;
-	float endRightX = bodyEndX + unitY * bodyWidthX;
+	float endLeftY =  bodyEndY + unitX * bodyWidthY;
+	float endRightX =  bodyEndX + unitY * bodyWidthX;
 	float endRightY = bodyEndY + -unitX * bodyWidthY;
 
 	vertices.insert(vertices.end(), {
@@ -187,8 +194,8 @@ void Vector2D::rotate(float degrees) {
 
 vec2 Vector2D::getComponents() {
 	vec2 components;
-	components.x = /*pixelsToGL(startX, window->width) +*/ cos(degreesToRads(direction)) * pixelMagnitudeToGL(magnitude, window->width);
-	components.y = /*pixelsToGL(startY, window->height) +*/ sin(degreesToRads(direction)) * pixelMagnitudeToGL(magnitude, window->height);
+	components.x =  cos(degreesToRads(direction)) * pixelMagnitudeToGL(magnitude, window->width);
+	components.y = sin(degreesToRads(direction)) * pixelMagnitudeToGL(magnitude, window->height);
 	return components;
 }
 

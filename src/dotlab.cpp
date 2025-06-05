@@ -16,11 +16,11 @@ int main()
 
 	window.init();
 	//Declaracion de objetos
-	Vector2D vec1(200.0f, 190.0f, 255.0f, 255.0f, 0.0f, 1.0f, &window);
+	Vector2D vec1(200.0f, 45.0f, 100.0f, 100.0f, 255.0f, 255.0f, 0.0f, &window);
 	Vector2D vec2(100.0f, 250.0f, 0.0f, 255.0f, 0.0f, 1.0f, &window);
 	Vector2D vec3(100.0f, 170.0f, 0.0f, 255.0f, 255.0f, 1.0f, &window);
 
-	VectorGroup2D vecGroup1(vector<Vector2D>({vec1, vec2}), &window, {});
+	VectorGroup2D vecGroup1(vector<Vector2D>({vec1}), &window, {});
 	CartesianPlane cp = CartesianPlane(&window);
 	//Ball b(700.0f, 400.0f, 50.0f, 255.0f, 255.0f, 255.0f, &window);
 	//b.accY = -9.81f;
@@ -31,7 +31,6 @@ int main()
 	bool grow = false;*/
 
 
-
 	while (!glfwWindowShouldClose(window.window)) {
 		auto currentFrame = chrono::high_resolution_clock::now();
 		chrono::duration<float> delta = currentFrame - lastFrame;
@@ -40,7 +39,7 @@ int main()
 		//rotateFlat += dt;
 
 		/*if (rotateFlat >= 0.0001f) {
-			vec1.rotate(-1.0f);
+			vec1P->rotate(1.0f);
 			rotateFlat = 0.0f;
 			if (!grow)
 				vec1.setMagnitude(vec1.magnitude - 0.08f);
@@ -49,6 +48,7 @@ int main()
 
 			if (vec1.magnitude <= 30.f) grow = true;
 			else if (vec1.magnitude >= 200.0f) grow = false;
+			vecGroup1.getSum();
 		}*/
 
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -57,6 +57,7 @@ int main()
 
 		cp.render();
 		vecGroup1.render();
+		//vecGroup1.render();
 
 		glfwSwapBuffers(window.window);
 		glfwPollEvents();

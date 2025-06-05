@@ -31,7 +31,6 @@ void VectorGroup2D::getSum() {
 	
 	for(Vector2D& v : vectors) {
 		vec2 components = v.getComponents();
-		cout << components.x << " " << components.y << endl;
 		totalXComponent += GLMagnitudeToPixels(components.x, window->width);
 		totalYComponent += GLMagnitudeToPixels(components.y, window->height);
 	}
@@ -39,20 +38,12 @@ void VectorGroup2D::getSum() {
 	float mainMagnitude = sqrt(totalXComponent * totalXComponent + totalYComponent * totalYComponent);
 	float mainAngle = atan2(totalYComponent, totalXComponent);
 
-	mainVector = Vector2D(mainMagnitude, radsToDegrees(mainAngle), 255.0f, 0.0f, 0.0f, window);
+	mainVector = Vector2D(mainMagnitude, radsToDegrees(mainAngle), 255.0f, 255.0f, 255.0f, window);
 	vec2 mainComponentMagnitude = mainVector.getComponents();
-	
-	float xComponentDirection = 180.0f;
-	float yComponentDirection = 90.0f;
-	if(mainVector.direction < 90.0f || mainVector.direction > 270.0f){
-		xComponentDirection = 0.0f;
-	}
-
-	if (mainVector.direction > 180.0f) {
-		yComponentDirection = 270.0f;
-	}
-
-	xComponent = Vector2D(GLMagnitudeToPixels(mainComponentMagnitude.x, window->width), xComponentDirection, 0.0f, 255.0f, 0.0f, window);
+	cout << "ComponenteX" << mainComponentMagnitude.x << endl;
+	float xComponentDirection = (mainComponentMagnitude.x >= 0.0f) ? 0.0f : 180.0f;
+	float yComponentDirection = (mainComponentMagnitude.y >= 0.0f) ? 90.0f : 0.0f;
+	xComponent = Vector2D(GLMagnitudeToPixels(mainComponentMagnitude.x, window->width), xComponentDirection, 255.0f, 0.0f, 0.0f, window);
 	yComponent = Vector2D(GLMagnitudeToPixels(mainComponentMagnitude.y, window->height), yComponentDirection, 0.0f, 0.0f, 255.0f, window);
 }
 
