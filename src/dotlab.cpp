@@ -5,6 +5,7 @@
 #include <Ball.h>
 #include <CartesianPlane.h>
 #include <Vector2D.h>
+#include <Functions.h>
 #include <VectorGroup2D.h>
 using namespace std;
 int main()
@@ -16,21 +17,20 @@ int main()
 
 	window.init();
 	//Declaracion de objetos
-	Vector2D vec1(200.0f, 45.0f, 100.0f, 100.0f, 255.0f, 255.0f, 0.0f, &window);
-	Vector2D vec2(100.0f, 250.0f, 0.0f, 255.0f, 0.0f, 1.0f, &window);
+	Vector2D vec1(30.0f, 0.0f, 100.0f, 100.0f, 255.0f, 255.0f, 0.0f, &window);
+	Vector2D vec2(30.0f, 180.0f, 0.0f, 255.0f, 0.0f, 1.0f, &window);
 	Vector2D vec3(100.0f, 170.0f, 0.0f, 255.0f, 255.0f, 1.0f, &window);
 
-	VectorGroup2D vecGroup1(vector<Vector2D>({vec1}), &window, {});
+	VectorGroup2D vecGroup1(vector<Vector2D*>({&vec1, &vec2}), &window, {});
 	CartesianPlane cp = CartesianPlane(&window);
-	//Ball b(700.0f, 400.0f, 50.0f, 255.0f, 255.0f, 255.0f, &window);
-	//b.accY = -9.81f;
-
+	Ball b(640.0f, 700.0f, 10.0f, 255.0f, 255.0f, 255.0f, &window);
+	//vecGroup1.move(GLToPixels(b.vertices[0].position.x, window.width), GLToPixels(b.vertices[0].position.y, window.height));
 
 	auto lastFrame = chrono::high_resolution_clock::now();
 	/*float rotateFlat = 0.0f;
 	bool grow = false;*/
-
-
+	b.forces.addVector(&vec1);
+	b.forces.addVector(&vec2);
 	while (!glfwWindowShouldClose(window.window)) {
 		auto currentFrame = chrono::high_resolution_clock::now();
 		chrono::duration<float> delta = currentFrame - lastFrame;
@@ -54,10 +54,10 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glUseProgram(window.shaderProgram);
-
-		cp.render();
-		vecGroup1.render();
-		//vecGroup1.render();
+		b.update(dt);
+		b.render();
+		/*cp.render();
+		vecGroup1.render();*/
 
 		glfwSwapBuffers(window.window);
 		glfwPollEvents();

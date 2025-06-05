@@ -56,6 +56,8 @@ Vector2D::Vector2D(float magnitude, float direction, float r, float g, float b, 
 	this->a = 1.0f;
 
 	window = w;
+	startX = window->width / 2;
+	startY = window->height / 2;
 	updateVertices();
 	generateVaoAndVbo();
 }
@@ -68,6 +70,9 @@ Vector2D::Vector2D(float magnitude, float direction, float r, float g, float b, 
 	this->a = a;
 
 	window = w;
+	startX = window->width / 2;
+	startY = window->height / 2;
+
 	updateVertices();
 	generateVaoAndVbo();
 }
@@ -80,8 +85,8 @@ Vector2D::Vector2D(float magnitude, float direction, float sX, float sY, float r
 
 	this->a = 1.0f;
 
-	startX = pixelsToGL(sX, window->width);
-	startY = pixelsToGL(sY, window->height);
+	startX = sX;
+	startY = sY;
 	updateVertices();
 	generateVaoAndVbo();
 }
@@ -129,8 +134,8 @@ void Vector2D::updateVertices() {
 	float unitX = cos(angleRadians);
 	float unitY = sin(angleRadians);
 
-	float convertedStartX = startX;
-	float convertedStartY = startY;
+	float convertedStartX = pixelsToGL(startX,window->width);
+	float convertedStartY = pixelsToGL(startY,window->height);
 
 	float baseLeftX = convertedStartX + -unitY * bodyWidthX;
 	float baseLeftY = convertedStartY +  unitX * bodyWidthY;
@@ -175,6 +180,7 @@ void Vector2D::updateVertices() {
 
 
 void Vector2D::render() {
+	if (magnitude == 0.0f) return;
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 7);
 	glBindVertexArray(arrowVao);
@@ -188,7 +194,12 @@ void Vector2D::setMagnitude(float newM) {
 }
 
 void Vector2D::rotate(float degrees) {
-	direction += degreesToRads(degrees);
+	direction += degrees;
+	updateVertices();
+}
+
+void Vector2D::setDirection(float degrees) {
+	direction = degrees;
 	updateVertices();
 }
 
@@ -199,3 +210,9 @@ vec2 Vector2D::getComponents() {
 	return components;
 }
 
+
+void Vector2D::move(float x, float y) {
+	startX = x;
+	startY = y;
+	updateVertices();
+}

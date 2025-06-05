@@ -1,2 +1,5 @@
-﻿  VectorGroup2D.cpp
+﻿  Ball.cpp
+C:\Users\Tripulante\Desktop\Repos\dotlab\src\core\Ball.cpp(30,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  dotlab.cpp
+  Generating Code...
   dotlab.vcxproj -> C:\Users\Tripulante\Desktop\Repos\dotlab\x64\Debug\dotlab.exe

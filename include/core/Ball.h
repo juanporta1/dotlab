@@ -2,6 +2,7 @@
 #include <vector>
 #include <Vertex.h>
 #include <Window.h>
+#include <VectorGroup2D.h>
 using namespace std;
 
 class Ball {
@@ -9,12 +10,16 @@ public:
 	GLuint vao, vbo;
 	vector<Vertex> vertices;
 	Window* window;
-	Vertex* center;
 	vector<float> floatVerticesData;
 	float velX = 0.0f;
 	float velY = 0.0f;
 	float accX = 0.0f;
 	float accY = 0.0f;
+	float mass = 0.0f;
+	float radius;
+	VectorGroup2D forces;
+	vector<Vector2D> vectors;
+	Vector2D reboundVector;
 	Ball(float x, float y, float radius, float r, float g, float b, Window* window);
 	~Ball();
 

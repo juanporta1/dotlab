@@ -11,16 +11,19 @@ using namespace std;
 class VectorGroup2D {	
 public:
 	
-	vector<Vector2D> vectors;
+	vector<Vector2D*> vectors;
 	Window* window;
+	float startX , startY;
 	Vector2D mainVector = Vector2D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, window);
 	VectorGroupOptions options;
 	Vector2D xComponent = Vector2D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, window), yComponent = Vector2D(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, window);
 
-	VectorGroup2D(vector<Vector2D> vectors, Window* window, VectorGroupOptions options);
+	VectorGroup2D(vector<Vector2D*> vectors, Window* window, VectorGroupOptions options);
+	VectorGroup2D(float x, float y,vector<Vector2D*> vectors, Window* window, VectorGroupOptions options);
 	~VectorGroup2D();
 
-	void addVector(Vector2D vec);
-	void getSum();
+	void addVector(Vector2D* vec);
+	void updateResulting();
 	void render();
+	void move(float x, float y);
 };

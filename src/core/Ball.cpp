@@ -3,12 +3,20 @@
 #include <vector>
 #include <Vertex.h>
 #include <iostream>
+#include <VectorGroup2D.h>
 using namespace std;
 
 
 
-Ball::Ball(float x, float y, float radius, float r, float g, float b, Window* window) : window(window)
+Ball::Ball(float x, float y, float rad, float r, float g, float b, Window* window) : window(window), forces(VectorGroup2D(vector<Vector2D*>({}), window, {})),
+reboundVector(0.0f, 0.0f, 100.0f, 100.0f, 0.0f, window)
 {
+	radius = rad;
+	mass = rad * 1;
+	float gravitiMagnitude = 9.81f * mass;
+	Vector2D gravityVector = Vector2D(gravitiMagnitude, 270.0f, 255.0f, 255.0f, 255.0f, 0.0f, window);
+	vectors.push_back(gravityVector);
+	forces.addVector(&vectors.back());
 	float glFirstX = pixelsToGL(x, window->width);
 	float glFirstY = pixelsToGL(y, window->height);
 	float glR = rgbToGL(r);
@@ -16,7 +24,8 @@ Ball::Ball(float x, float y, float radius, float r, float g, float b, Window* wi
 	float glB = rgbToGL(b);
 	Vertex vertex(glFirstX, glFirstY, glR, glG, glB);
 	vertices = vector<Vertex>({ vertex });
-	center = &vertices[0];
+	forces.move(GLToPixels(vertices[0].position.x, window->width), GLToPixels(vertices[0].position.y, window->height));
+
 	for (int i = 0; i < 37; i++) {
 		float angle = 2.0f * 3.14159265359 * i / 36;
 		float pX = x + cos(angle) * radius;
@@ -53,9 +62,14 @@ Ball::~Ball(){}
 void Ball::render() {
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLE_FAN, 0, static_cast<GLsizei>(vertices.size()));
+	forces.render();
 }
 
 void Ball::update(float dt) {
+	vec2 components = forces.mainVector.getComponents();
+	accX = GLMagnitudeToPixels(components.x, window->width) / mass;
+	accY = GLMagnitudeToPixels(components.y, window->height) / mass;
+
 
 	velX += accX * dt;
 	velY += accY * dt;
@@ -84,6 +98,7 @@ void Ball::updateFloatVerticesData() {
 		floatVerticesData.push_back(v.color.b);
 		floatVerticesData.push_back(v.color.a);
 	}
+	forces.move(GLToPixels(vertices[0].position.x, window->width), GLToPixels(vertices[0].position.y, window->height));
 }
 
 void Ball::updateBuffer() {

@@ -29,6 +29,8 @@ public:
 	void updateVertices();
 	void render();
 	void setMagnitude(float newMagnitude);
+	void move(float startX, float startY);
 	void rotate(float degrees);
+	void setDirection(float degrees);
 	vec2 getComponents();
 };

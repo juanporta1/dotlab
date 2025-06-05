@@ -11,6 +11,10 @@ using namespace std;
 float pixelsToGL(float value,int wS ) {
 	return ((value / wS) * 2.0f) - 1.0f;
 }
+
+float GLToPixels(float value, int wS) {
+    return ((value + 1.0f) / 2.0f) * wS;
+}
 float pixelMagnitudeToGL(float value, int wS) {
     return value * 2.0f / wS;
 }
