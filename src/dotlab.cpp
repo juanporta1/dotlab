@@ -23,14 +23,14 @@ int main()
 
 	VectorGroup2D vecGroup1(vector<Vector2D*>({&vec1, &vec2}), &window, {});
 	CartesianPlane cp = CartesianPlane(&window);
-	Ball b(640.0f, 700.0f, 10.0f, 255.0f, 255.0f, 255.0f, &window);
+	Ball b(640.0f, 700.0f, 50.0f, 255.0f, 255.0f, 255.0f, &window);
 	//vecGroup1.move(GLToPixels(b.vertices[0].position.x, window.width), GLToPixels(b.vertices[0].position.y, window.height));
 
 	auto lastFrame = chrono::high_resolution_clock::now();
 	/*float rotateFlat = 0.0f;
 	bool grow = false;*/
-	b.forces.addVector(&vec1);
-	b.forces.addVector(&vec2);
+	//b.forces.addVector(&vec1);
+	//b.forces.addVector(&vec2);
 	while (!glfwWindowShouldClose(window.window)) {
 		auto currentFrame = chrono::high_resolution_clock::now();
 		chrono::duration<float> delta = currentFrame - lastFrame;

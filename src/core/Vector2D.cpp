@@ -180,12 +180,15 @@ void Vector2D::updateVertices() {
 
 
 void Vector2D::render() {
-	if (magnitude == 0.0f) return;
-	glBindVertexArray(vao);
-	glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 7);
-	glBindVertexArray(arrowVao);
-	glDrawArrays(GL_TRIANGLES, 0, arrowVertices.size() / 7);
-	glBindVertexArray(0);
+	
+	if (magnitude != 0.0f)
+	{
+		glBindVertexArray(vao);
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 7);
+		glBindVertexArray(arrowVao);
+		glDrawArrays(GL_TRIANGLES, 0, arrowVertices.size() / 7);
+		glBindVertexArray(0);
+	}
 }
 
 void Vector2D::setMagnitude(float newM) {

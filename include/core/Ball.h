@@ -6,6 +6,10 @@
 using namespace std;
 
 class Ball {
+private:
+	
+	void calculateBound(float dt);
+	void recalculateVertices();
 public:
 	GLuint vao, vbo;
 	vector<Vertex> vertices;
@@ -17,9 +21,12 @@ public:
 	float accY = 0.0f;
 	float mass = 0.0f;
 	float radius;
+	float kConstant = 100.0f;
 	VectorGroup2D forces;
 	vector<Vector2D> vectors;
+	Vector2D gravityVector;
 	Vector2D reboundVector;
+
 	Ball(float x, float y, float radius, float r, float g, float b, Window* window);
 	~Ball();
 

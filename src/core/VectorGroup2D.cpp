@@ -30,11 +30,18 @@ void VectorGroup2D::render() {
 	for (Vector2D* v : vectors) {
 		v->render();
 	}
-	mainVector.render();
 	if (options.renderComponents) {
+		if (mainVector.magnitude == 0.0f) 
+		{
+			xComponent.setMagnitude(0.0f);
+			yComponent.setMagnitude(0.0f);
+		}
+
 		xComponent.render();
 		yComponent.render();
 	}
+	mainVector.render();
+
 }
 
 void VectorGroup2D::updateResulting() {
@@ -56,7 +63,7 @@ void VectorGroup2D::updateResulting() {
 
 
 	vec2 mainComponentMagnitude = mainVector.getComponents();
-	cout << "ComponenteX" << mainComponentMagnitude.x << endl;
+	
 	float xComponentDirection = (mainComponentMagnitude.x >= 0.0f) ? 0.0f : 180.0f;
 	float yComponentDirection = (mainComponentMagnitude.y >= 0.0f) ? 90.0f : 270.0f;
 	xComponent.setMagnitude(GLMagnitudeToPixels(abs(mainComponentMagnitude.x), window->width));

@@ -1,6 +1,7 @@
 #include <Ball.h>
 #include <Functions.h>
 #include <vector>
+#include <numbers>
 #include <Vertex.h>
 #include <iostream>
 #include <VectorGroup2D.h>
@@ -9,14 +10,15 @@ using namespace std;
 
 
 Ball::Ball(float x, float y, float rad, float r, float g, float b, Window* window) : window(window), forces(VectorGroup2D(vector<Vector2D*>({}), window, {})),
-reboundVector(0.0f, 0.0f, 100.0f, 100.0f, 0.0f, window)
+gravityVector(0.0f, 270.0f, 255.0f, 255.0f, 255.0f, 0.0f, window), reboundVector(0.0f, 90.0f, 50.0f, 150.0f, 100.0f, window)
 {
 	radius = rad;
-	mass = rad * 1;
+	mass = rad * 0.1f;;
 	float gravitiMagnitude = 9.81f * mass;
-	Vector2D gravityVector = Vector2D(gravitiMagnitude, 270.0f, 255.0f, 255.0f, 255.0f, 0.0f, window);
-	vectors.push_back(gravityVector);
-	forces.addVector(&vectors.back());
+	gravityVector.setMagnitude(gravitiMagnitude);
+	forces.addVector(&gravityVector);
+	forces.addVector(&reboundVector);
+
 	float glFirstX = pixelsToGL(x, window->width);
 	float glFirstY = pixelsToGL(y, window->height);
 	float glR = rgbToGL(r);
@@ -65,7 +67,50 @@ void Ball::render() {
 	forces.render();
 }
 
+void Ball::calculateBound(float dt) {
+	float convertedRadius = pixelMagnitudeToGL(radius, window->height);
+	float gravityMagnitude = 9.81f * mass;
+
+	bool touchingFloor = (vertices[0].position.y - convertedRadius <= -0.99f);
+
+	if (touchingFloor) {
+
+		vertices[0].position.y = -0.99f + convertedRadius;
+		velY = -velY * 0.8f;
+
+		// Acá frenás la velocidad si es muy baja
+		if (abs(velY) < 0.01f) 
+		{
+			velY = 0.0f;
+			gravityVector.setMagnitude(0.0f);
+		}
+
+	}
+	else {
+		gravityVector.setMagnitude(gravityMagnitude);
+		
+	}
+
+
+}
+
+void Ball::recalculateVertices() {
+
+	float centerX = vertices[0].position.x;
+	float centerY = vertices[0].position.y;
+
+	for (int i = 1; i < vertices.size(); i++) {
+		
+		float dx = vertices[i].position.x - centerX;
+		float dy = vertices[i].position.y - centerY;
+
+		float distance = sqrt(dx * dx + dy * dy);
+
+	}
+}
+
 void Ball::update(float dt) {
+	calculateBound(dt);
 	vec2 components = forces.mainVector.getComponents();
 	accX = GLMagnitudeToPixels(components.x, window->width) / mass;
 	accY = GLMagnitudeToPixels(components.y, window->height) / mass;

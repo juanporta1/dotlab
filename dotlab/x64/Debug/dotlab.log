@@ -1,5 +1,4 @@
 ﻿  Ball.cpp
-C:\Users\Tripulante\Desktop\Repos\dotlab\src\core\Ball.cpp(30,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  dotlab.cpp
-  Generating Code...
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\numbers(11): warning STL4038: The contents of <numbers> are available only with C++20 or later.
+C:\Users\Tripulante\Desktop\Repos\dotlab\src\core\Ball.cpp(32,15): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   dotlab.vcxproj -> C:\Users\Tripulante\Desktop\Repos\dotlab\x64\Debug\dotlab.exe
